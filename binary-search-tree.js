@@ -116,6 +116,97 @@ class BinarySearchTree {
       }
     }
   }
+
+  breadthFirstSearch() {
+    let currentNode = this.root
+    let list = []
+    let queue = []
+    queue.push(currentNode)
+
+    while (queue.length > 0) {
+      currentNode = queue.shift()
+      list.push(currentNode.value)
+
+      if (currentNode.left !== null)
+        queue.push(currentNode.left)
+
+      if (currentNode.right !== null)
+        queue.push(currentNode.right)
+    }
+
+    return list
+  }
+
+  breadthFirstSearchRecursive(queue, list) {
+    if (queue.length === 0) {
+      return list
+    }
+
+    let currentNode = queue.shift()
+    list.push(currentNode.value)
+
+    if (currentNode.left !== null)
+      queue.push(currentNode.left)
+
+    if (currentNode.right !== null)
+      queue.push(currentNode.right)
+
+    return this.breadthFirstSearchRecursive(queue, list)
+  }
+
+  DFSInOrder() {
+    return this.traverseInOrder(this.root, [])
+  }
+
+  DFSPreOrder() {
+    return this.traversePreOrder(this.root, [])
+  }
+
+  DFSPostOrder() {
+    return this.traversePostOrder(this.root, [])
+  }
+
+  traverseInOrder(node, list) {
+    if (node.left !== null) {
+      this.traverseInOrder(node.left, list)
+    }
+
+    list.push(node.value)
+
+    if (node.right !== null) {
+      this.traverseInOrder(node.right, list)
+    }
+
+    return list
+  }
+
+  traversePreOrder(node, list) {
+    list.push(node.value)
+
+    if (node.left !== null) {
+      this.traversePreOrder(node.left, list)
+    }
+
+    if (node.right !== null) {
+      this.traversePreOrder(node.right, list)
+    }
+
+    return list
+  }
+
+  traversePostOrder(node, list) {
+    if (node.left !== null) {
+      this.traversePostOrder(node.left, list)
+    }
+
+    if (node.right !== null) {
+      this.traversePostOrder(node.right, list)
+    }
+
+    list.push(node.value)
+
+    return list
+  }
 } 
 
 function traverse(node) {
@@ -134,8 +225,13 @@ tree.insert(40)
 tree.insert(9)
 tree.insert(15)
 
-tree.remove(20)
+// tree.remove(20)
 
-console.log(JSON.stringify(traverse(tree.root)))
+// console.log(JSON.stringify(traverse(tree.root)))
 
 // console.log(tree.lookup(20))
+// console.log(tree.breadthFirstSearch())
+// console.log(tree.breadthFirstSearchRecursive([tree.root], []))
+// console.log(tree.DFSInOrder())
+// console.log(tree.DFSPreOrder())
+console.log(tree.DFSPostOrder())
