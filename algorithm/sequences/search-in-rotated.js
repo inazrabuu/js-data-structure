@@ -14,7 +14,7 @@ const search = function(nums, target) {
       } else {
         right = mid - 1
       }
-    // left sorted portion
+    // right sorted portion
     } else {
       if (target < nums[mid] || target > nums[right]) {
         right = mid - 1
