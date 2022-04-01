@@ -1,33 +1,30 @@
 const search = function(nums, target) {
-  let right = nums.length - 1
-  return searchBinary(nums, 0, right, target)
-}
+  let left = 0,
+      right = nums.length - 1
 
-function searchBinary(nums, left, right, target) {
-  if (left > right) {
-    return -1
-  }
+  while (left <= right) {
+    let mid = Math.floor((left + right) /2)
+    if (nums[mid] === target)
+      return mid
 
-  let mid = Math.floor((left + right) / 2)
-  if (nums[mid] === target) {
-    return mid
-  }
-
-  // left hand portion
-  if (nums[left] <= nums[mid]) {
-    if (target >= nums[left] && target <= nums[mid]) {
-      return searchBinary(nums, left, mid - 1, target)
+    // left sorted portion
+    if (nums[left] <= nums[mid]) {
+      if (target < nums[left] || target > nums[mid]) {
+        left = mid + 1
+      } else {
+        right = mid - 1
+      }
+    // right sorted portion
+    } else {
+      if (target < nums[mid] || target > nums[right]) {
+        right = mid - 1
+      } else {
+        left = mid + 1
+      }
     }
-
-    return searchBinary(nums, mid + 1, right, target)
   }
 
-  // right hand portion
-  if (target >= nums[mid] && target <= nums[length]) {
-    return searchBinary(nums, mid + 1, right, target)
-  }
-
-  return searchBinary(nums, left, mid - 1, target)
+  return -1
 }
 
 console.log(search([4,5,6,7,0,1,2], 6))
