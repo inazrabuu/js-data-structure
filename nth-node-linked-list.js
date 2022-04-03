@@ -1,8 +1,8 @@
 const removeNthFromEnd = function(head, n) {
   let temp = {
-    val: 0,
-    next: head
-  },
+        val: 0,
+        next: head
+      },
       left = temp,
       right = head
 
