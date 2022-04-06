@@ -1,3 +1,4 @@
+// Iterative using stack (DFS)
 const maxDepth = function(root) {
   let stack = [[root, 1]],
       res = 0
@@ -13,6 +14,15 @@ const maxDepth = function(root) {
   }
 
   return res
+}
+
+// recursive DFS
+const maxDepth2 = function(root) {
+  if (root === null) {
+    return 0
+  }
+
+  return 1 + Math.max(maxDepth2(root.left), maxDepth2(root.right))
 }
 
 let root = {
@@ -36,16 +46,16 @@ let root = {
     }
   }
 }
-console.log(maxDepth(root))
+console.log(maxDepth2(root))
 
-root = {
-  val: 1,
-  left: null,
-  right: {
-    val: 2,
-    left: null,
-    right: null
-  }
-}
+// root = {
+//   val: 1,
+//   left: null,
+//   right: {
+//     val: 2,
+//     left: null,
+//     right: null
+//   }
+// }
 
-console.log(maxDepth(root))
+// console.log(maxDepth(root))
