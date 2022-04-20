@@ -7,3 +7,4 @@ const getSum = function(a, b) {
 }
 let a = 2, b = 3
 console.log(getSum(a, b))
+
